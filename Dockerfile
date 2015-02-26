@@ -22,5 +22,4 @@ COPY video_looper.ini /boot/video_looper.ini
 
 COPY video_looper.conf /etc/supervisor/conf.d/
 
-CMD ["/usr/bin/supervisord"]
-
+CMD ["/usr/bin/supervisord", "-c /etc/supervisor/conf.d/video_looper.conf"]
