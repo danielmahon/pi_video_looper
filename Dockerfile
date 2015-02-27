@@ -23,6 +23,18 @@ RUN python setup.py install --force
 
 COPY video_looper.ini /boot/video_looper.ini
 
+WORKDIR /
+
+# Setup SSH
+RUN echo 'root:raspberry' | chpasswd
+RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+# SSH login fix. Otherwise user is kicked off after login
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+
+ENV NOTVISIBLE "in users profile"
+RUN echo "export VISIBLE=now" >> /etc/profile
+
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 22
