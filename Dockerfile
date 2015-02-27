@@ -3,7 +3,9 @@ FROM resin/rpi-raspbian:jessie
 RUN apt-get update && apt-get -y install \
   wget \
   build-essential \
-  python-dev python-pip python-pygame \
+  python-dev \
+  python-pip \
+  python-pygame \
   supervisor \
   openssh-server \
   git \
