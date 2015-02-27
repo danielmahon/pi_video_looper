@@ -1,6 +1,8 @@
 # Copyright 2015 Adafruit Industries.
 # Author: Tony DiCola
 # License: GNU GPLv2, see LICENSE.txt
+import urllib
+
 class DirectoryReader(object):
 
     def __init__(self, config):
@@ -8,6 +10,16 @@ class DirectoryReader(object):
         directory on disk.
         """
         self._load_config(config)
+        self._download(config)
+
+    def _download(self, config):
+        urls = config.get('directory', 'urls')
+        if urls:
+            for i, url in enumerate(urls):
+                # Download files from urls
+                print(url)
+                file = urllib.URLopener()
+                file.retrieve(url, "movie" + i + ".mp4")
 
     def _load_config(self, config):
         self._path = config.get('directory', 'path')
@@ -20,7 +32,7 @@ class DirectoryReader(object):
         """Return true if the file search paths have changed."""
         # For now just return false and assume the path never changes.  In the
         # future it might be interesting to watch for file changes and return
-        # true if new files are added/removed from the directory.  This is 
+        # true if new files are added/removed from the directory.  This is
         # called in a tight loop of the main program so it needs to be fast and
         # not resource intensive.
         return False
