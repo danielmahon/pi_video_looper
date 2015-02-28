@@ -34,10 +34,9 @@ class USBDriveMounter(object):
         """
         self.remove_all()
         # Enumerate USB drive partitions by path like /dev/sda1, etc.
-        print 'Hello World!'
-        for x in self._context.list_devices(subsystem='block', DEVTYPE='partition')
-            print x
-            print x['ID_BUS']
+        for x in self._context.list_devices(subsystem='block', DEVTYPE='partition'):
+            print(x)
+            print(x['ID_BUS'])
 
         nodes = [x.device_node for x in self._context.list_devices(subsystem='block',
                                                                    DEVTYPE='partition') \
