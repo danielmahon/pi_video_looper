@@ -34,7 +34,12 @@ class USBDriveMounter(object):
         """
         self.remove_all()
         # Enumerate USB drive partitions by path like /dev/sda1, etc.
-        nodes = [x.device_node for x in self._context.list_devices(subsystem='block', 
+        print 'Hello World!'
+        for x in self._context.list_devices(subsystem='block', DEVTYPE='partition')
+            print x
+            print x['ID_BUS']
+
+        nodes = [x.device_node for x in self._context.list_devices(subsystem='block',
                                                                    DEVTYPE='partition') \
                  if 'ID_BUS' in x and x['ID_BUS'] == 'usb']
         # Mount each drive under the mount root.
@@ -54,7 +59,7 @@ class USBDriveMounter(object):
         self._monitor.start()
 
     def poll_changes(self):
-        """Check for changes to USB drives.  Returns true if there was a USB 
+        """Check for changes to USB drives.  Returns true if there was a USB
         drive change, otherwise false.
         """
         # Look for a drive change.
