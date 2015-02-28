@@ -37,7 +37,8 @@ class USBDriveMounter(object):
         for x in self._context.list_devices(subsystem='block', DEVTYPE='partition'):
             print(x)
             print(x.device_type)
-            print(x.ID_TYPE)
+            if x.ID_TYPE:
+                print(x.ID_TYPE)
 
         nodes = [x.device_node for x in self._context.list_devices(subsystem='block',
                                                                    DEVTYPE='partition') \
