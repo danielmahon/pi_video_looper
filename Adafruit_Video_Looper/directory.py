@@ -10,7 +10,7 @@ class DirectoryReader(object):
         directory on disk.
         """
         self._load_config(config)
-        # self._download(config)
+        self._download(config)
 
     def _download(self, config):
         urls = config.get('directory', 'urls')
