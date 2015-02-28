@@ -13,9 +13,9 @@ class DirectoryReader(object):
         self._download(config)
 
     def _download(self, config):
-        urls = config.get('directory', 'urls')
+        urls = config.get('download_urls')
         if urls:
-            for i, url in enumerate(urls):
+            for i, url in urls:
                 # Download files from urls
                 print(url)
                 file = urllib.URLopener()
