@@ -19,7 +19,7 @@ class DirectoryReader(object):
                 # Download files from urls
                 print(url)
                 file = urllib.URLopener()
-                file.retrieve(url, "movie" + i + ".mp4")
+                file.retrieve(url, "movie" + str(i) + ".mp4")
 
     def _load_config(self, config):
         self._path = config.get('directory', 'path')
